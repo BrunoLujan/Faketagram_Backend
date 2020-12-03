@@ -20,9 +20,9 @@ class Initialize extends Migration
             $table->string("username",20);
             $table->string("email")->unique();
             $table->string("password");
-            $table->string("status");
-            $table->string("cellphone");
-            $table->string("image_storage_path");
+            $table->string("status")->nullable();
+            $table->string("cellphone")->nullable();
+            $table->string("image_storage_path")->nullable();
             
         });
 

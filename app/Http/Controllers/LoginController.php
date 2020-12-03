@@ -5,6 +5,7 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 
 class LoginController extends Controller
@@ -29,10 +30,7 @@ class LoginController extends Controller
             'lastname' => 'required|string',
             'username' => 'required|string',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string',
-            'status' => 'required|string',
-            'cellphone' => 'required|string',
-            'image_storage_path' => 'required|string'
+            'password' => 'required|string'
 
         ]);
 
@@ -41,10 +39,7 @@ class LoginController extends Controller
         $user->lastname = $request->input("lastname");
         $user->username = $request->input("username");
         $user->email = $request->input("email");
-        $user->password = $request->input("password");
-        $user->status = $request->input("status");
-        $user->cellphone = $request->input("cellphone");
-        $user->image_storage_path= $request->input("image_storage_path");
+        $user->password = Hash::make($request->input("password"));
         $user->save();
 
 
