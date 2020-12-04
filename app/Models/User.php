@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Authenticatable
 {
     use HasApiTokens,HasFactory,Notifiable;
-
+    
     protected $primaryKey = 'user_id';
     public $timestamps = false;
     protected $fillable = ['name','lastname','username','email','password'];

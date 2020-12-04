@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Response;
+use Carbon\Carbon;
 
 
 class LoginController extends Controller
@@ -47,4 +49,32 @@ class LoginController extends Controller
             'message' => 'Successfully created user!'
         ], 201);
     }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+
+        $user = User::where("email", $request->input("email"))->get()->first();
+        if ($user == null) {
+            return response()->json([
+                'message' => 'UnauthorizedEmail'
+            ], 401);
+        }
+        if (!Hash::check($request->input("password"), $user->password)) {
+            return response()->json([
+                'message' => 'UnauthorizedPassword'
+            ], 401);
+        }
+        
+        $tokenResult = $user->createToken('Auth Token')->accessToken;
+
+        return response()->json([
+            'access_token' => $tokenResult,
+            'token_type' => 'Bearer'
+        ]);
+    }
 }
+

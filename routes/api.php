@@ -23,5 +23,6 @@ use App\Http\Controllers\LoginController;
 
 
 Route::post('/signup', [LoginController::class,'signUp']);
+Route::post('/login',[LoginController::class,'login']);
 
 
