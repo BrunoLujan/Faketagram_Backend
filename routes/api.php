@@ -25,4 +25,10 @@ use App\Http\Controllers\LoginController;
 Route::post('/signup', [LoginController::class,'signUp']);
 Route::post('/login',[LoginController::class,'login']);
 
+Route::group(['middleware' => 'auth:api'],function(){
+Route::get('/user',[LoginController::class,'user']);
+Route::get('/logout',[LoginController::class,'logout']);
+});
+
+
 

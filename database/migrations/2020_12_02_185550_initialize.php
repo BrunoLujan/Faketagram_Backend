@@ -22,6 +22,7 @@ class Initialize extends Migration
             $table->string("password");
             $table->string("status")->nullable();
             $table->string("cellphone")->nullable();
+            $table->boolean("remember_me")->nullable();
             $table->string("image_storage_path")->nullable();
             
         });
