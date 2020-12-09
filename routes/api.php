@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,13 +24,15 @@ use App\Http\Controllers\ProfileController;
 //Route::post("/login", [LoginController::class, "authenticate"]);
 
 
-Route::post('/signup', [LoginController::class,'signUp']);
-Route::post('/login',[LoginController::class,'login']);
+Route::post('/user/sign_up', [LoginController::class,'signUp']);
+Route::post('/user/login',[LoginController::class,'login']);
 
 Route::group(['middleware' => 'auth:api'],function(){
-Route::get('/user',[LoginController::class,'user']);
-Route::get('/logout',[LoginController::class,'logout']);
-Route::post('/update_profile', [ProfileController::class,'updateProfile']);
+Route::get('/user//logout',[LoginController::class,'logout']);
+Route::get('/user/user',[LoginController::class,'user']);
+Route::post('/user//update_profile', [ProfileController::class,'updateProfile']);
+Route::get('/user/{user_id}/get_user',[HomeController::class,'getUserById']);
+Route::get('/user/get_name',[HomeController::class,'getUserByName']);
 });
 
 

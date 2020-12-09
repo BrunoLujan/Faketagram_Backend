@@ -36,5 +36,6 @@ class ProfileController extends Controller
             'message' => 'Successfully updated user!'
         ], 201);
     }
+
 }
 
