@@ -19,8 +19,8 @@ class HomeController extends Controller
         return $user;
     }
 
-    public function getUserByName(Request $request){
-        $user = User::whereRaw('name LIKE ?', [$request->input("name")])->get();
+    public function getUserByName(Request $request, string $name){
+        $user =User::where("name", "LIKE", $name . "%")->get();
         
         return $user;
     }

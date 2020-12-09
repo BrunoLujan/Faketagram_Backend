@@ -32,7 +32,7 @@ Route::get('/user//logout',[LoginController::class,'logout']);
 Route::get('/user/user',[LoginController::class,'user']);
 Route::post('/user//update_profile', [ProfileController::class,'updateProfile']);
 Route::get('/user/{user_id}/get_user',[HomeController::class,'getUserById']);
-Route::get('/user/get_name',[HomeController::class,'getUserByName']);
+Route::get('/user/{name}/get_name',[HomeController::class,'getUserByName']);
 });
 
 
