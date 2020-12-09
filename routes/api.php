@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,10 @@ Route::post('/login',[LoginController::class,'login']);
 Route::group(['middleware' => 'auth:api'],function(){
 Route::get('/user',[LoginController::class,'user']);
 Route::get('/logout',[LoginController::class,'logout']);
+Route::post('/update_profile', [ProfileController::class,'updateProfile']);
 });
+
+
 
 
 
