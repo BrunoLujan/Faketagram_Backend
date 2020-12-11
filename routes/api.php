@@ -28,7 +28,7 @@ Route::post('/user/sign_up', [LoginController::class,'signUp']);
 Route::post('/user/login',[LoginController::class,'login']);
 
 Route::group(['middleware' => 'auth:api'],function(){
-Route::get('/user//logout',[LoginController::class,'logout']);
+Route::get('/user/logout',[LoginController::class,'logout']);
 Route::get('/user/user',[LoginController::class,'user']);
 Route::post('/user//update_profile', [ProfileController::class,'updateProfile']);
 Route::get('/user/{user_id}/get_user',[HomeController::class,'getUserById']);
