@@ -24,15 +24,16 @@ use App\Http\Controllers\HomeController;
 //Route::post("/login", [LoginController::class, "authenticate"]);
 
 
-Route::post('/user/sign_up', [LoginController::class,'signUp']);
+Route::post('/user/signUp', [LoginController::class,'signUp']);
 Route::post('/user/login',[LoginController::class,'login']);
 
 Route::group(['middleware' => 'auth:api'],function(){
 Route::get('/user/logout',[LoginController::class,'logout']);
 Route::get('/user/user',[LoginController::class,'user']);
-Route::post('/user//update_profile', [ProfileController::class,'updateProfile']);
-Route::get('/user/{user_id}/get_user',[HomeController::class,'getUserById']);
-Route::get('/user/{name}/get_name',[HomeController::class,'getUserByName']);
+Route::post('/user//updateProfile', [ProfileController::class,'updateProfile']);
+Route::get('/user/{user_id}/getUser',[HomeController::class,'getUserById']);
+Route::get('/user/{name}/getName',[HomeController::class,'getUserByName']);
+Route::post('/user/{user_followed_id}/followUser',[HomeController::class,'followUserById']);
 });
 
 

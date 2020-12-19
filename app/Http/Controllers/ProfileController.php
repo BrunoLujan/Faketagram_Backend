@@ -34,7 +34,7 @@ class ProfileController extends Controller
 
 
         return response()->json([
-            'message' => 'Successfully updated user!'
+            'message' => 'Successfully updated user!' 
         ], 201);
     }
 
