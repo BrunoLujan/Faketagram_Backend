@@ -54,4 +54,13 @@ class HomeController extends Controller
              $user->follows()
         );           
     }
+
+    public function getFollowers(Request $request){
+        $user = $request->user();
+        $name = $user->name;
+
+        return response()->json(
+             $user->followers()
+        );           
+    }
 }

@@ -22,4 +22,9 @@ class User extends Authenticatable
     {
         return DB::table("users_follower")->where("user_follower_id", $this->user_id)->get();
     }
+
+    public function followers()
+    {
+        return DB::table("users_follower")->where("user_followed_id", $this->user_id)->get();
+    }
 }
