@@ -28,12 +28,16 @@ class HomeController extends Controller
 
     public function followUserById(Request $request, int $user_followed_id){
         
+        $user = $request->user();
+        $user_follower_id = $user->user_id;
 
-        if(isset($user_followed_id)){
-            $user = $request->user();
-            $user_follower_id = $user->user_id;
+        if(DB::table("users_follower")->where("user_follower_id", $user_follower_id)->where("user_followed_id", $user_followed_id)->count() == 0){
             DB::table("users_follower")->insert(["user_follower_id"=>$user_follower_id,
             "user_followed_id"=>$user_followed_id]);
+        }else{
+            return response()->json([
+                'message' => 'You already follow this user' 
+            ]);
         }
 
         return response()->json([
