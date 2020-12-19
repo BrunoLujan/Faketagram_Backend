@@ -50,9 +50,8 @@ class HomeController extends Controller
         $user = $request->user();
         $name = $user->name;
 
-        return response()->json([
+        return response()->json(
              $user->follows()
-        ]);
-               
+        );           
     }
 }
