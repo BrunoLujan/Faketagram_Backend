@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use Illuminate\Tttp\Token;
 
 
+
 class HomeController extends Controller
 { 
     public function getUserById(int $user_id){ //no lo estamos usando
@@ -42,7 +43,16 @@ class HomeController extends Controller
 
         return response()->json([
             'message' => 'Successfully followed user!' 
+        ]);   
+    }
+
+    public function getFollows(Request $request){
+        $user = $request->user();
+        $name = $user->name;
+
+        return response()->json([
+             $user->follows()
         ]);
-        
+               
     }
 }

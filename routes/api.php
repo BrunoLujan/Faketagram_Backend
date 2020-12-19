@@ -34,6 +34,7 @@ Route::post('/user//updateProfile', [ProfileController::class,'updateProfile']);
 Route::get('/user/{user_id}/getUser',[HomeController::class,'getUserById']);
 Route::get('/user/{name}/getName',[HomeController::class,'getUserByName']);
 Route::post('/user/{user_followed_id}/followUser',[HomeController::class,'followUserById']);
+Route::get('/user/following',[HomeController::class,'getFollows']);
 });
 
 
