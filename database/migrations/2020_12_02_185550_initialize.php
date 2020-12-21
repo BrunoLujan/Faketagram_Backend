@@ -64,7 +64,7 @@ class Initialize extends Migration
 
         Schema::Create('comments', function (Blueprint $table){
             $table->date('publish_date');
-            $table->string('image_storage_path');
+            $table->string('comment');
             $table->integer("user_id")->unsigned();
             $table->foreign("user_id")->references("user_id")->on("users");
         });
