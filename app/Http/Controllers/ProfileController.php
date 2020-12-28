@@ -27,9 +27,9 @@ class ProfileController extends Controller
             $user->save();
         }
 
-        if($request -> has('username') && $request->input("username") != null){
+        if($request -> has('image_storage_path') && $request->input("image_storage_path") != null){
             $user = $request->user();
-            $user->username = $request->input("username"); 
+            $user->image_storage_path = $request->input("image_storage_path"); 
             $user->save();
         }
 
