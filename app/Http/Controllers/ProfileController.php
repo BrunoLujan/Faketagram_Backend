@@ -14,22 +14,15 @@ use Validator;
 
 class ProfileController extends Controller
 { 
-    public function updateProfile(Request $request)
+    public function updateStatus(Request $request)
     {
         Validator::validate($request->all(),[
-            'username' => 'string',
             'status' => 'string',
         ]);  
         
         if($request -> has('status')){
             $user = $request->user();
             $user->status= $request->input("status"); 
-            $user->save();
-        }
-
-        if($request -> has('image_storage_path') && $request->input("image_storage_path") != null){
-            $user = $request->user();
-            $user->image_storage_path = $request->input("image_storage_path"); 
             $user->save();
         }
 
