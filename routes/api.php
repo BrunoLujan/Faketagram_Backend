@@ -30,7 +30,7 @@ Route::post('/user/login',[LoginController::class,'login']);
 Route::group(['middleware' => 'auth:api'],function(){
 Route::get('/user/logout',[LoginController::class,'logout']);
 Route::get('/user/user',[LoginController::class,'user']);
-Route::post('/user/updateProfile', [ProfileController::class,'updateProfile']);
+Route::post('/user/updateStatus', [ProfileController::class,'updateStatus']);
 Route::post('/user/uploadProfilePhoto', [ProfileController::class,'uploadProfilePhoto']);
 Route::get('/user/{user_id}/getUser',[HomeController::class,'getUserById']);
 Route::get('/user/{name}/getName',[HomeController::class,'getUserByName']);
