@@ -37,11 +37,16 @@ class ProfileController extends Controller
         
         if ($request->hasFile("image_storage_path")) {
             $user = $request->user();
+            if ($user->image_storage_path != null) {
+                $old_photo_path =  $user->image_storage_path;
+                Storage::disk("photos")->delete($old_photo_path);
+            }
+
+           
             $user->image_storage_path = $request->file("image_storage_path")->store(
                 "", "photos"
             );
         }
-        $user->save();
 
         if(!$user->save()){
             return response()->json([
@@ -52,6 +57,7 @@ class ProfileController extends Controller
             'message' => 'Successfully uploaded photo!' 
         ], 201);
     }
+
 
     public function uploadPhotosFeed(Request $request) {
         
