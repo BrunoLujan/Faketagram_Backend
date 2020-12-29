@@ -16,15 +16,13 @@ class ProfileController extends Controller
 { 
     public function updateStatus(Request $request)
     {
-        Validator::validate($request->all(),[
-            'status' => 'string',
+        $request->validate([
+            'status' => 'string'
         ]);  
         
-        if($request -> has('status')){
-            $user = $request->user();
-            $user->status= $request->input("status"); 
-            $user->save();
-        }
+        $user = $request->user();
+        $user->status= $request->input("status"); 
+        $user->save();
 
         return response()->json([
             'message' => 'Successfully updated user!' 
