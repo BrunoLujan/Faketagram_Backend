@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FeedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::post('/user/{user_followed_id}/followUser',[HomeController::class,'follow
 Route::delete('/user/{user_followed_id}/unfollowUser',[HomeController::class,'unfollowUserById']);
 Route::get('/user/following',[HomeController::class,'getFollows']);
 Route::get('/user/followers',[HomeController::class,'getFollowers']);
+Route::post('/user/{photograph_id}/addToFavourites',[FeedController::class,'addToFavourites']);
+Route::get('/user/favourites',[FeedController::class,'getFavourites']);
 
 });
 

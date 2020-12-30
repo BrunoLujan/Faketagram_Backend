@@ -27,4 +27,9 @@ class User extends Authenticatable
     {
         return DB::table("users_follower")->where("user_followed_id", $this->user_id)->get();
     }
+
+    public function favourites()
+    {
+        return DB::table("users_photographs_favourites")->where("user_id", $this->user_id)->get();
+    }
 }

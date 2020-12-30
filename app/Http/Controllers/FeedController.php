@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
-use App\Models\Comment;
+use App\Models\Photograph;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,5 +13,31 @@ use Illuminate\Tttp\Token;
 
 class FeedController extends Controller
 { 
+    public function addToFavourites(Request $request, int $photograph_id){
+        
+        $user = $request->user();
+        $user_id = $user->user_id;
 
+        if(DB::table("users_photographs_favourites")->where("user_id", $user_id)->where("photograph_id", $photograph_id)->count() == 0){
+            DB::table("users_photographs_favourites")->insert(["user_id"=>$user_id,
+            "photograph_id"=>$photograph_id]);
+
+            return response()->json([
+                'message' => 'Successfully added to favourites' 
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'You already added this image to favorites' 
+            ]);
+        }
+    }
+
+    public function getFavourites(Request $request){
+        $user = $request->user();
+        //$name = $user->name;
+
+        return response()->json(
+             $user->favourites()
+        );           
+    }
 }

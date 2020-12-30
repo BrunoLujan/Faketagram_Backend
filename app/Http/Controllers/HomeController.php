@@ -56,10 +56,7 @@ class HomeController extends Controller
 
         return response()->json([
             'message' => 'Successfully unfollowed user!' 
-        ]);
-        
-
-     
+        ]);  
          
     }
 
