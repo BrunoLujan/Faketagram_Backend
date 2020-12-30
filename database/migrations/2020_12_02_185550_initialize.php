@@ -38,7 +38,7 @@ class Initialize extends Migration
 
         Schema::Create("photographs", function (Blueprint $table){
             $table->increments("photograph_id");
-            $table->date("publish_date");
+            $table->date("publish_date")->nullable();
             $table->string("image_storage_path");  
             $table->integer("user_id")->unsigned();
             $table->foreign("user_id")->references("user_id")->on("users");  

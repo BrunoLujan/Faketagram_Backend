@@ -59,10 +59,10 @@ class ProfileController extends Controller
     }
 
 
-    public function uploadPhotosFeed(Request $request) {
+    public function uploadFeedPhoto(Request $request) {
         
         $request->validate([
-            'publish_date' => 'required|date',
+            //'publish_date' => 'required|date',
             'image_storage_path'=> 'required|image|max:2048'
         ]);
 

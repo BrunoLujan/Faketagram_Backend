@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Photograph extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'photograph_id';
+    public $timestamps = false;
+    protected $fillable = ['publish_date','image_storage_path'];
 }
