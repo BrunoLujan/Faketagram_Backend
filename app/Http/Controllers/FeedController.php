@@ -34,10 +34,28 @@ class FeedController extends Controller
 
     public function getFavourites(Request $request){
         $user = $request->user();
-        //$name = $user->name;
 
         return response()->json(
              $user->favourites()
         );           
+    }
+
+    public function addLikeToPhoto(Request $request, int $photograph_id){
+        
+        $user = $request->user();
+        $user_id = $user->user_id;
+
+        if(DB::table("users_photographs_likes")->where("user_id", $user_id)->where("photograph_id", $photograph_id)->count() == 0){
+            DB::table("users_photographs_likes")->insert(["user_id"=>$user_id,
+            "photograph_id"=>$photograph_id]);
+
+            return response()->json([
+                'message' => 'You like this photo' 
+            ]);
+        }else{
+            return response()->json([
+                'message' => 'You already like this photo' 
+            ]);
+        }
     }
 }

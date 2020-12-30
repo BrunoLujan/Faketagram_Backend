@@ -42,6 +42,7 @@ Route::get('/user/following',[HomeController::class,'getFollows']);
 Route::get('/user/followers',[HomeController::class,'getFollowers']);
 Route::post('/user/{photograph_id}/addToFavourites',[FeedController::class,'addToFavourites']);
 Route::get('/user/favourites',[FeedController::class,'getFavourites']);
+Route::post('/user/{photograph_id}/addLikeToPhoto',[FeedController::class,'addLikeToPhoto']);
 
 });
 
