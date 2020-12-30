@@ -47,6 +47,21 @@ class HomeController extends Controller
         ]);   
     }
 
+    public function unfollowUserById(Request $request, int $user_followed_id){
+        
+        $user = $request->user();
+        $user_follower_id = $user->user_id;
+
+        if(DB::table("users_follower")->where("user_follower_id", $user_follower_id)->where("user_followed_id", $user_followed_id)->count() == 0){
+            DB::table("users_follower")->delete(["user_follower_id"=>$user_follower_id,
+            "user_followed_id"=>$user_followed_id]);
+        }
+
+        return response()->json([
+            'message' => 'Successfully unfollowed user!' 
+        ]);   
+    }
+
     public function getFollows(Request $request){
         $user = $request->user();
         $name = $user->name;
@@ -64,4 +79,6 @@ class HomeController extends Controller
              $user->followers()
         );           
     }
+
+   
 }
