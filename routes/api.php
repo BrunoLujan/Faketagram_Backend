@@ -35,7 +35,7 @@ Route::post('/user/uploadProfilePhoto', [ProfileController::class,'uploadProfile
 Route::get('/user/{user_id}/getUser',[HomeController::class,'getUserById']);
 Route::get('/user/{name}/getName',[HomeController::class,'getUserByName']);
 Route::post('/user/{user_followed_id}/followUser',[HomeController::class,'followUserById']);
-Route::post('/user/{user_followed_id}/unfollowUser',[HomeController::class,'unfollowUserById']);
+Route::delete('/user/{user_followed_id}/unfollowUser',[HomeController::class,'unfollowUserById']);
 Route::get('/user/following',[HomeController::class,'getFollows']);
 Route::get('/user/followers',[HomeController::class,'getFollowers']);
 
