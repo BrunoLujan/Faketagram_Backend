@@ -43,6 +43,7 @@ Route::delete('/user/{user_followed_id}/unfollowUser',[HomeController::class,'un
 Route::get('/user/following',[HomeController::class,'getFollows']);
 Route::get('/user/followers',[HomeController::class,'getFollowers']);
 Route::post('/user/{photograph_id}/addToFavourites',[FeedController::class,'addToFavourites']);
+Route::delete('/user/{photograph_id}/deleteFromFavourites',[FeedController::class,'deleteFromFavourites']);
 Route::get('/user/favourites',[FeedController::class,'getFavourites']);
 Route::post('/user/{photograph_id}/addLikeToPhoto',[FeedController::class,'addLikeToPhoto']);
 

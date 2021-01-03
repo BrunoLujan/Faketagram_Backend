@@ -13,10 +13,13 @@ use Illuminate\Tttp\Token;
 
 class FeedController extends Controller
 { 
-    public function addToFavourites(Request $request, int $photograph_id){
+    public function addToFavourites(Request $request, int $photograph_id)
+    {
         
         $user = $request->user();
         $user_id = $user->user_id;
+
+        //if($user->image_storage_path != null)
 
         if(DB::table("users_photographs_favourites")->where("user_id", $user_id)->where("photograph_id", $photograph_id)->count() == 0){
             DB::table("users_photographs_favourites")->insert(["user_id"=>$user_id,
@@ -32,7 +35,8 @@ class FeedController extends Controller
         }
     }
 
-    public function getFavourites(Request $request){
+    public function getFavourites(Request $request)
+    {
         $user = $request->user();
 
         return response()->json(
@@ -40,7 +44,21 @@ class FeedController extends Controller
         );           
     }
 
-    public function addLikeToPhoto(Request $request, int $photograph_id){
+    public function deleteFromFavourites(Request $request, int $photograph_id)
+    {
+        $user = $request->user();
+        $user_id = $user->user_id;
+
+        DB::table("users_photographs_favourites")->where("user_id", $user_id)->where("photograph_id", $photograph_id)->delete();
+
+            return response()->json([
+                'message' => 'Successfully deleted from favourites' 
+            ]);
+        
+    }
+
+    public function addLikeToPhoto(Request $request, int $photograph_id)
+    {
         
         $user = $request->user();
         $user_id = $user->user_id;
