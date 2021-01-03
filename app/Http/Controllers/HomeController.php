@@ -14,8 +14,7 @@ use Illuminate\Tttp\Token;
 
 class HomeController extends Controller
 { 
-    public function getUserById(int $user_id){ 
-        
+    public function getUserById(int $user_id){   
 
         $user = User::find($user_id);
 

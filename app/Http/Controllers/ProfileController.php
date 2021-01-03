@@ -87,5 +87,12 @@ class ProfileController extends Controller
         );           
     }
 
+    public function getPhotographs(Request $request){
+        $photograph = Photograph::orderBy("publish_date","DESC")->get();
+        return response()->json(
+            $photograph
+        );           
+    }
+
 }
 
