@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Response;
 use Illuminate\Http\Token;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 
@@ -62,7 +63,6 @@ class ProfileController extends Controller
     public function uploadFeedPhoto(Request $request) {
         
         $request->validate([
-            //'publish_date' => 'required|date',
             'image_storage_path'=> 'required|image|max:2048'
         ]);
 
@@ -78,6 +78,13 @@ class ProfileController extends Controller
         return response()->json([
             'message' => 'Successfully uploaded photo!' 
         ], 201);
+    }
+
+    public function getPhotographsByUserId(Request $request, int $user_id){
+
+        return response()->json(
+            DB::table("photographs")->where("user_id", $user_id)->get()
+        );           
     }
 
 }
