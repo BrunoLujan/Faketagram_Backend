@@ -45,6 +45,7 @@ Route::get('/user/followers',[HomeController::class,'getFollowers']);
 Route::post('/user/{photograph_id}/addToFavourites',[FeedController::class,'addToFavourites']);
 Route::delete('/user/{photograph_id}/deleteFromFavourites',[FeedController::class,'deleteFromFavourites']);
 Route::get('/user/favourites',[FeedController::class,'getFavourites']);
+Route::get('/user/likes',[FeedController::class,'getLikes']);
 Route::post('/user/{photograph_id}/addLikeToPhoto',[FeedController::class,'addLikeToPhoto']);
 Route::delete('/user/{photograph_id}/deleteLikeFromPhoto',[FeedController::class,'deleteLikeFromPhoto']);
 

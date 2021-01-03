@@ -33,4 +33,9 @@ class User extends Authenticatable
         return DB::table("users_photographs_favourites")->where("user_id", $this->user_id)->get();
     }
 
+    public function likes()
+    {
+        return DB::table("users_photographs_likes")->where("user_id", $this->user_id)->get();
+    }
+
 }

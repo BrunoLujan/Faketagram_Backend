@@ -44,6 +44,15 @@ class FeedController extends Controller
         );           
     }
 
+    public function getLikes(Request $request)
+    {
+        $user = $request->user();
+
+        return response()->json(
+             $user->likes()
+        );           
+    }
+
     public function deleteFromFavourites(Request $request, int $photograph_id)
     {
         $user = $request->user();
