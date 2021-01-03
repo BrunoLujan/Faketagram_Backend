@@ -44,13 +44,11 @@ class FeedController extends Controller
         );           
     }
 
-    public function getLikes(Request $request)
+    public function getLikesByUserId(Request $request, int $user_id)
     {
-        $user = $request->user();
-
         return response()->json(
-             $user->likes()
-        );           
+            DB::table("users_photographs_likes")->where("user_id", $user_id)->get()
+        );         
     }
 
     public function deleteFromFavourites(Request $request, int $photograph_id)
