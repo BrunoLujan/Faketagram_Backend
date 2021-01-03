@@ -76,4 +76,17 @@ class FeedController extends Controller
             ]);
         }
     }
+
+    public function deleteLikeFromPhoto(Request $request, int $photograph_id)
+    {
+        $user = $request->user();
+        $user_id = $user->user_id;
+
+        DB::table("users_photographs_likes")->where("user_id", $user_id)->where("photograph_id", $photograph_id)->delete();
+
+            return response()->json([
+                'message' => 'Successfully deleted from favourites' 
+            ]);
+        
+    }
 }

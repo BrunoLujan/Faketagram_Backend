@@ -46,6 +46,7 @@ Route::post('/user/{photograph_id}/addToFavourites',[FeedController::class,'addT
 Route::delete('/user/{photograph_id}/deleteFromFavourites',[FeedController::class,'deleteFromFavourites']);
 Route::get('/user/favourites',[FeedController::class,'getFavourites']);
 Route::post('/user/{photograph_id}/addLikeToPhoto',[FeedController::class,'addLikeToPhoto']);
+Route::delete('/user/{photograph_id}/deleteLikeFromPhoto',[FeedController::class,'deleteLikeFromPhoto']);
 
 });
 
