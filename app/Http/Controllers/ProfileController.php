@@ -88,10 +88,12 @@ class ProfileController extends Controller
     }
 
     public function getFeedPhotographs(Request $request){
-        $photograph = Photograph::orderBy("publish_date","DESC")->get();
+        $photograph = Photograph::whereIn("user_id", DB::table("users_follower")->selectRaw("user_followed_id AS user_id")->where("user_follower_id",
+        $request->user()->user_id))->orderBy("publish_date","DESC")->get();
+
         return response()->json(
             $photograph
-        );           
+        );          
     }
 
 }

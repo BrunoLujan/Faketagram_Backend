@@ -63,7 +63,7 @@ class Initialize extends Migration
         });
 
         Schema::Create('comments', function (Blueprint $table){
-            $table->integer("comment_id")->unsigned();
+            $table->increments("comment_id")->unsigned();
             $table->date('publish_date')->nullable();
             $table->string('comment');
             $table->integer("user_id")->unsigned();

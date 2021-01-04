@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Photograph;
+use App\Models\Comment;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -101,5 +102,36 @@ class FeedController extends Controller
         return response()->json(
             DB::table("users_photographs_likes")->where("photograph_id", $photograph_id)->count()
         );         
+    }
+
+    public function addCommentToPhotograph(Request $request, int $photograph_id)
+    {
+        $request->validate([
+            'comment'=> 'required|string'
+        ]);
+        
+        $comment = new Comment();
+        $comment->comment = $request->input("comment");
+        $comment->publish_date = date("Y-m-d h:i:s", time());
+        $comment->user_id = $request->user()->user_id;
+        $comment->photograph_id = $photograph_id;
+
+        if (!$comment->save()) {
+            return response()->json([
+                'message' => 'Try again!' 
+            ]);
+        }
+        return response()->json([
+            'message' => 'Successfully comment added to photo!' 
+        ], 201);
+
+    }
+
+    public function getPhotographComments(Request $request, int $photograph_id){
+        
+        $comment = Comment::orderBy("publish_date","DESC")->where("photograph_id", $photograph_id)->get();
+        return response()->json(
+            $comment
+        );                 
     }
 }

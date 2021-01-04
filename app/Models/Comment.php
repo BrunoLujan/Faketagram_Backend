@@ -12,4 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'comment_id';
+    public $timestamps = false;
+    protected $fillable = ['publish_date','comment'];
+
 }
