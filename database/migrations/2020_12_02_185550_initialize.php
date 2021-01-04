@@ -63,10 +63,13 @@ class Initialize extends Migration
         });
 
         Schema::Create('comments', function (Blueprint $table){
-            $table->date('publish_date');
+            $table->integer("comment_id")->unsigned();
+            $table->date('publish_date')->nullable();
             $table->string('comment');
             $table->integer("user_id")->unsigned();
             $table->foreign("user_id")->references("user_id")->on("users");
+            $table->integer("photograph_id")->unsigned();
+            $table->foreign("photograph_id")->references("photograph_id")->on("photographs");
         });
     }
 

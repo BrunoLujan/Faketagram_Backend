@@ -19,8 +19,6 @@ class FeedController extends Controller
         $user = $request->user();
         $user_id = $user->user_id;
 
-        //if($user->image_storage_path != null)
-
         if(DB::table("users_photographs_favourites")->where("user_id", $user_id)->where("photograph_id", $photograph_id)->count() == 0){
             DB::table("users_photographs_favourites")->insert(["user_id"=>$user_id,
             "photograph_id"=>$photograph_id]);
@@ -44,12 +42,6 @@ class FeedController extends Controller
         );           
     }
 
-    public function getLikesByUserId(Request $request, int $user_id)
-    {
-        return response()->json(
-            DB::table("users_photographs_likes")->where("user_id", $user_id)->get()
-        );         
-    }
 
     public function deleteFromFavourites(Request $request, int $photograph_id)
     {
@@ -75,7 +67,7 @@ class FeedController extends Controller
             "photograph_id"=>$photograph_id]);
 
             return response()->json([
-                'message' => 'You like this photo' 
+                'message' => 'Now you like this photograph' 
             ]);
         }else{
             return response()->json([
@@ -95,5 +87,19 @@ class FeedController extends Controller
                 'message' => 'Successfully deleted from favourites' 
             ]);
         
+    }
+
+    public function getLikesByUserId(Request $request, int $user_id)
+    {
+        return response()->json(
+            DB::table("users_photographs_likes")->where("user_id", $user_id)->get()
+        );         
+    }
+
+    public function getLikesByPhotographId(Request $request, int $photograph_id)
+    {
+        return response()->json(
+            DB::table("users_photographs_likes")->where("photograph_id", $photograph_id)->count()
+        );         
     }
 }
