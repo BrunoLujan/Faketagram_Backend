@@ -43,6 +43,13 @@ class FeedController extends Controller
         );           
     }
 
+    public function getPhotographById(Request $request, int $photograph_id)
+    {
+        $photograph = Photograph::find($photograph_id);
+
+        return $photograph;          
+    }
+
 
     public function deleteFromFavourites(Request $request, int $photograph_id)
     {

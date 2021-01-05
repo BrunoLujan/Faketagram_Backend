@@ -55,6 +55,7 @@ Route::get('/user/{photograph_id}/getLikesByPhotographId',[FeedController::class
 Route::delete('/user/{photograph_id}/deleteLikeFromPhoto',[FeedController::class,'deleteLikeFromPhoto']);
 Route::post('/user/{photograph_id}/addCommentToPhotograph',[FeedController::class,'addCommentToPhotograph']);
 Route::get('/user/{photograph_id}/getPhotographComments',[FeedController::class,'getPhotographComments']);
+Route::get('/user/{photograph_id}/getPhotographById',[FeedController::class,'getPhotographById']);
 
 });
 
