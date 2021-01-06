@@ -18,7 +18,7 @@ class ProfileController extends Controller
     public function updateStatus(Request $request)
     {
         $request->validate([
-            'status' => 'string'
+            'status' => 'required|string'
         ]);  
         
         $user = $request->user();
@@ -26,7 +26,7 @@ class ProfileController extends Controller
         $user->save();
 
         return response()->json([
-            'message' => 'Successfully updated user!' 
+            'message' => 'Successfully updated status!' 
         ], 201);
     }
 

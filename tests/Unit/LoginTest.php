@@ -98,7 +98,7 @@ class LoginTest extends TestCase
      * 
      * @return void
      */
-    public function login_with_wrong_password_test()
+    public function login_with_an_existent_account_and_wrong_password_test()
     {
         $response = $this->postJson("/api/user/login", [
 
@@ -108,6 +108,28 @@ class LoginTest extends TestCase
         ]);
         $response->assertJson([
             "message" => "Unauthorized Password"  
+        ]);
+    }
+
+    /**
+     * Attempts to test log in with an existent account
+     * 
+     * @test
+     * 
+     * @return void
+     */
+    public function login_with_an_existent_account_test()
+    {
+        $response = $this->postJson("/api/user/login", [
+
+            "email" => "emailTest@gmail.com",
+            "password" => "passwordTest",
+            "remember_me" => true
+        ]);
+        $response->assertJsonStructure([
+            "access_token",
+            "token_type",
+            "expires_at"
         ]);
     }
 }
