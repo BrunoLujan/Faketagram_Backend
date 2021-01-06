@@ -81,10 +81,17 @@ class ProfileController extends Controller
     }
 
     public function getPhotographsByUserId(Request $request, int $user_id){
-
-        return response()->json(
-            DB::table("photographs")->where("user_id", $user_id)->get()
-        );           
+ 
+        if (User::where("user_id", $user_id)->count() == 0) {
+            return response()->json([
+                'message' => 'The user doesn´t exit'
+            ]);
+        }else {
+            return response()->json(
+                DB::table("photographs")->where("user_id", $user_id)->get()
+            ); 
+        }
+                  
     }
 
     public function getFeedPhotographs(Request $request){
@@ -93,7 +100,8 @@ class ProfileController extends Controller
 
         return response()->json(
             $photograph
-        );          
+        );    
+        
     }
 
 }
