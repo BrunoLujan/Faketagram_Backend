@@ -14,17 +14,27 @@ use Illuminate\Tttp\Token;
 
 class HomeController extends Controller
 { 
-    public function getUserById(int $user_id){   
-
-        $user = User::find($user_id);
-
-        return $user;
+    public function getUserById(int $user_id){  
+        $user = User::find($user_id); 
+        if (User::where("user_id", $user_id)->count() == 0) 
+        {
+            return response()->json([
+                'message' => 'The user doesn´t exit'
+            ]);
+        }else {
+            return $user; 
+        }  
     }
 
     public function getUserByName(Request $request, string $name){
-        $user =User::where("name", "LIKE", $name . "%")->get();
-        
-        return $user;
+        $user = User::where("name", "LIKE", $name . "%")->get();
+        if (count($user)>0) {
+            return $user;
+        }else{
+            return response()->json([
+                'message' => 'The user doesn´t exit'
+            ]);
+        } 
     }
 
     public function followUserById(Request $request, int $user_followed_id){
@@ -65,7 +75,7 @@ class HomeController extends Controller
 
         return response()->json(
              $user->follows()
-        );           
+        ); 
     }
 
     public function getFollowers(Request $request){
