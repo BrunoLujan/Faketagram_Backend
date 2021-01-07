@@ -46,8 +46,14 @@ class FeedController extends Controller
     public function getPhotographById(Request $request, int $photograph_id)
     {
         $photograph = Photograph::find($photograph_id);
-
-        return $photograph;          
+        if (Photograph::where("photograph_id", $photograph_id)->count() == 0) 
+        {
+            return response()->json([
+                'message' => 'The photograph doesn´t exit'
+            ]);
+        }else {
+            return $photograph;  
+        }        
     }
 
 
@@ -99,16 +105,30 @@ class FeedController extends Controller
 
     public function getLikesByUserId(Request $request, int $user_id)
     {
-        return response()->json(
-            DB::table("users_photographs_likes")->where("user_id", $user_id)->get()
-        );         
+
+        if (User::where("user_id", $user_id)->count() == 0) {
+            return response()->json([
+                'message' => 'The user doesn´t exit'
+            ]);
+        }else {
+            return response()->json(
+                DB::table("users_photographs_likes")->where("user_id", $user_id)->get()
+            ); 
+        }         
     }
 
     public function getLikesByPhotographId(Request $request, int $photograph_id)
     {
-        return response()->json(
-            DB::table("users_photographs_likes")->where("photograph_id", $photograph_id)->count()
-        );         
+        if (Photograph::where("photograph_id", $photograph_id)->count() == 0) {
+            return response()->json([
+                'message' => 'The photograph doesn´t exit'
+            ]);
+        }else{
+            return response()->json(
+                DB::table("users_photographs_likes")->where("photograph_id", $photograph_id)->count()
+            );
+        }
+                 
     }
 
     public function addCommentToPhotograph(Request $request, int $photograph_id)
@@ -135,10 +155,18 @@ class FeedController extends Controller
     }
 
     public function getPhotographComments(Request $request, int $photograph_id){
+
+        if (Photograph::where("photograph_id", $photograph_id)->count() == 0) {
+            return response()->json([
+                'message' => 'The photograph doesn´t exit'
+            ]);
+        }else{
+            $comment = Comment::orderBy("publish_date","DESC")->where("photograph_id", $photograph_id)->get();
+            return response()->json(
+                $comment
+            ); 
+        }
         
-        $comment = Comment::orderBy("publish_date","DESC")->where("photograph_id", $photograph_id)->get();
-        return response()->json(
-            $comment
-        );                 
+                        
     }
 }
