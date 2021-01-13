@@ -71,7 +71,7 @@ class LoginTest extends TestCase
     }
 
     /**
-     * Attempts to test log in with a non-existent account.
+     * Attempts to test log in with a non-existent email registered.
      * 
      * @test
      * 
